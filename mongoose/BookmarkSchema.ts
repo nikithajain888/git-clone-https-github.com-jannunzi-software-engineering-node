@@ -3,5 +3,5 @@ import Bookmark from '../models/Bookmark';
 const BookmarkSchema = new mongoose.Schema<Bookmark>({
     tuit: {type: Schema.Types.ObjectId, ref: "TuitModel"},
     bookmarkedBy: {type: Schema.Types.ObjectId, ref: "UserModel"},
-}, {collection: 'follow'});
+}, {collection: 'bookmarks'});
 export default BookmarkSchema;
