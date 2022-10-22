@@ -26,7 +26,6 @@
  const DB_NAME = "FSE-DB";
  const DB_QUERY = "retryWrites=true&w=majority";
  const connectionString=PROTOCOL+"://"+DB_USERNAME+":"+DB_PASSWORD+"@"+HOST+"/"+DB_NAME+"?"+DB_QUERY;
- //const connectionString = 'mongodb+srv://nikithajain888:Passwordfse@cluster0.uz88i7e.mongodb.net/FSE-DB?retryWrites=true&w=majority';
  // connect to the database
  mongoose.connect(connectionString);
  
