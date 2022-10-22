@@ -1,41 +1,53 @@
 /**
- * @file Implements an Express Node HTTP server.
+ * @file Implements an Express Node HTTP server. Declares RESTful Web services
+ * enabling CRUD operations on the following resources:
+ * <ul>
+ *     <li>users</li>
+ *     <li>tuits</li>
+ *     <li>likes</li>
+ * </ul>
+ * 
+ * Connects to a remote MongoDB instance hosted on the Atlas cloud database
+ * service
  */
-import express, {Request, Response} from 'express';
-import mongoose from 'mongoose';
-import UserDao from './daos/UserDao';
-import UserController from './controllers/UserController';
-import TuitDao from './daos/TuitDao';
-import TuitController from './controllers/TuitController';
-const cors = require('cors')
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.get('/', (req: Request, res: Response) =>
-    res.send('Welcome to Foundation of Software Engineering!!!!'));
-
-app.get('/hello', (req: Request, res: Response) =>
-    res.send('Welcome to Foundation of Software Engineering!'));
-
-
- const userDao = new UserDao();
- const userController = new UserController(app, userDao);
- const tuitDao = new TuitDao();
- const tuitController = new TuitController(app, tuitDao);
- const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    autoIndex: false,
-    maxPoolSize: 10,
-    serverSelectionTimeoutMS: 5000,
-    socketTimeoutMS: 45000,
-    family: 4
-}
- mongoose.connect('mongodb://127.0.0.1:27017/FSE-DB', options);
+ import express, {Request, Response} from 'express';
+ import UserController from "./controllers/UserController";
+ import TuitController from "./controllers/TuitController";
+ import LikeController from "./controllers/LikeController";
+ import FollowController from "./controllers/FollowController";
+ import mongoose from "mongoose";
+ var cors = require('cors')
+ 
+ // build the connection string
+ const PROTOCOL = "mongodb+srv";
+ const DB_USERNAME = process.env.DB_USERNAME;
+ const DB_PASSWORD = process.env.DB_PASSWORD;
+ const HOST = "cluster0.m8jeh.mongodb.net";
+ const DB_NAME = "FSE-DB";
+ const DB_QUERY = "retryWrites=true&w=majority";
+ const connectionString = 'mongodb+srv://nikithajain888:Passwordfse@cluster0.uz88i7e.mongodb.net/FSE-DB?retryWrites=true&w=majority';
+ // connect to the database
+ mongoose.connect(connectionString);
+ 
+ const app = express();
+ app.use(express.json());
+ app.use(cors());
+ 
+ app.get('/', (req: Request, res: Response) =>
+     res.send('Welcome!'));
+ 
+ app.get('/add/:a/:b', (req: Request, res: Response) =>
+     res.send(req.params.a + req.params.b));
+ 
+ // create RESTful Web service API
+ const userController = UserController.getInstance(app);
+ const tuitController = TuitController.getInstance(app);
+ const likesController = LikeController.getInstance(app);
+  const followController = FollowController.getInstance(app);
+ 
  /**
- * Start a server listening at port 4001 locally
- * but use environment variable PORT on Heroku if available.
- */
- const PORT = 4001;
+  * Start a server listening at port 4000 locally
+  * but use environment variable PORT on Heroku if available.
+  */
+ const PORT = 4000;
  app.listen(process.env.PORT || PORT);

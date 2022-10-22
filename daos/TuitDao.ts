@@ -1,52 +1,43 @@
-import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/TuitModel";
-import TuitDaoI from "../interfaces/TuitDao";
-import User from "../models/User";
-
-export default class TuitDao implements TuitDaoI {
-    async findAllTuits(): Promise<Tuit[]> {
-        const tuitMongooseModels = await TuitModel.find();
-        const tuitModels = tuitMongooseModels
-            .map((tuitMongooseModel) => {
-                return new Tuit(
-                    tuitMongooseModel?._id.toString()??'',
-                    tuitMongooseModel?.tuit??''
-                );
-            });
-        return tuitModels;
-    }
-    async findTuitsByUser(uid: string): Promise<Tuit[]> {
-        const tuitMongooseModels = await TuitModel.where({postedBy:uid});
-        const tuitModels = tuitMongooseModels
-            .map((tuitMongooseModel) => {
-                return new Tuit(
-                    tuitMongooseModel?._id.toString()??'',
-                    tuitMongooseModel?.tuit??''
-                );
-            });
-        return tuitModels;
-    }
-    async findTuitById(tid: string): Promise<any> {
-        const tuitMongooseModel = await TuitModel.findById(tid);
-        return new Tuit(
-            tuitMongooseModel?._id.toString()??'',
-            tuitMongooseModel?.tuit??''
-        );
-    }
-    async createTuit(tuit: Tuit): Promise<Tuit> {
-        const tuitMongooseModel = await TuitModel.create(tuit);
-        return new Tuit(
-            tuitMongooseModel?._id.toString()??'',
-            tuitMongooseModel?.tuit??''
-        );
-    }
-    async updateTuit(tid: string, tuit: Tuit): Promise<any> {
-        return await TuitModel.updateOne({_id: tid}, {$set: {
-            tuit: tuit,
-        }});
-    }
-    async deleteTuit(tid: string): Promise<any> {
-        return await TuitModel.deleteOne({_id: tid});
-    }
-
-}
+/**
+ * @file Implements DAO managing data storage of tuits. Uses mongoose TuitModel
+ * to integrate with MongoDB
+ */
+ import TuitModel from "../mongoose/TuitModel";
+ import Tuit from "../models/Tuit";
+ import TuitDaoI from "../interfaces/TuitDao";
+ 
+ /**
+  * @class UserDao Implements Data Access Object managing data storage
+  * of Users
+  * @property {UserDao} userDao Private single instance of UserDao
+  */
+ export default class TuitDao implements TuitDaoI{
+     private static tuitDao: TuitDao | null = null;
+     public static getInstance = (): TuitDao => {
+         if(TuitDao.tuitDao === null) {
+             TuitDao.tuitDao = new TuitDao();
+         }
+         return TuitDao.tuitDao;
+     }
+     private constructor() {}
+     findAllTuits = async (): Promise<Tuit[]> =>
+         TuitModel.find()
+             .populate("postedBy")
+             .exec();
+     findAllTuitsByUser = async (uid: string): Promise<Tuit[]> =>
+         TuitModel.find({postedBy: uid})
+             .populate("postedBy")
+             .exec();
+     findTuitById = async (uid: string): Promise<any> =>
+         TuitModel.findById(uid)
+             .populate("postedBy")
+             .exec();
+     createTuitByUser = async (uid: string, tuit: Tuit): Promise<Tuit> =>
+         TuitModel.create({...tuit, postedBy: uid});
+     updateTuit = async (uid: string, tuit: Tuit): Promise<any> =>
+         TuitModel.updateOne(
+             {_id: uid},
+             {$set: tuit});
+     deleteTuit = async (uid: string): Promise<any> =>
+         TuitModel.deleteOne({_id: uid});
+ }
