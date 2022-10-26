@@ -11,8 +11,8 @@ import User from "./User";
   * @message
   */
 export default interface Message {
-    sender:User,
-    sentOn:Date,
-    receiver:User,
-    message:string
- };
+    sender: User,
+    sentOn: Date,
+    receiver: User,
+    message: string
+};

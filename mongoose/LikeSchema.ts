@@ -9,7 +9,7 @@ import Like from '../models/Like';
   * @property {tuit} tid: primary key of tuit liked.
 */
 const LikeSchema = new mongoose.Schema<Like>({
-    tuit: {type: Schema.Types.ObjectId, ref: "TuitModel"},
-    likedBy: {type: Schema.Types.ObjectId, ref: "UserModel"},
-}, {collection: 'likes'});
+    tuit: { type: Schema.Types.ObjectId, ref: "TuitModel" },
+    likedBy: { type: Schema.Types.ObjectId, ref: "UserModel" },
+}, { collection: 'likes' });
 export default LikeSchema;

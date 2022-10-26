@@ -1,47 +1,47 @@
- /**
- * @file Implements DAO managing data storage of likes. Uses mongoose LikeModel
- * to integrate with MongoDB
- */
+/**
+* @file Implements DAO managing data storage of likes. Uses mongoose LikeModel
+* to integrate with MongoDB
+*/
 import Like from "../models/Like";
 import LikeModel from "../mongoose/LikeModel";
 import LikeDaoI from "../interfaces/LikeDao";
 import User from "../models/User";
 import Tuit from "../models/Tuit";
 
- /**
-  * @class LikeDao Implements Data Access Object managing data storage
-  * of Like
-  * @property {UserDao} userDao Private single instance of LikeDao
-  */
+/**
+ * @class LikeDao Implements Data Access Object managing data storage
+ * of Like
+ * @property {UserDao} userDao Private single instance of LikeDao
+ */
 
 export default class LikeDao implements LikeDaoI {
 
-     /**
-   * Uses LikeModel to create a new like for tuit.
-   * @param {string} uid User id of user who likes the tuit
-   * @param {string} tid Tuit id of tuit to be liked
-   * @returns Promise To be notified when the likes are retrieved from
-   * database
-   */
+    /**
+  * Uses LikeModel to create a new like for tuit.
+  * @param {string} uid User id of user who likes the tuit
+  * @param {string} tid Tuit id of tuit to be liked
+  * @returns Promise To be notified when the likes are retrieved from
+  * database
+  */
 
     userLikesTuit = async (uid: string, tid: string): Promise<any> =>
-        LikeModel.create({tuit: tid, likedBy: uid});
+        LikeModel.create({ tuit: tid, likedBy: uid });
 
-      /**
-   * Uses LikeModel to remove a  like for tuit.
-   * @param {string} uid User id of user who unlikes the tuit
-   * @param {string} tid Tuit id of tuit to be unliked
-   * @returns Promise To be notified when the likes are deleted from
-   * database
-   */
+    /**
+ * Uses LikeModel to remove a  like for tuit.
+ * @param {string} uid User id of user who unlikes the tuit
+ * @param {string} tid Tuit id of tuit to be unliked
+ * @returns Promise To be notified when the likes are deleted from
+ * database
+ */
 
-      /**
-   * Uses LikeModel to count number of likes a tuit has.
-   * @param {string} tid Tuit id of tuit to be unliked
-   * @returns Promise To be notified with the total likes on specific tuit.
-   */
-    findTuitLikesCount = async (tid: string): Promise<any> => 
-    LikeModel.countDocuments({tuit: tid});
+    /**
+ * Uses LikeModel to count number of likes a tuit has.
+ * @param {string} tid Tuit id of tuit to be unliked
+ * @returns Promise To be notified with the total likes on specific tuit.
+ */
+    findTuitLikesCount = async (tid: string): Promise<any> =>
+        LikeModel.countDocuments({ tuit: tid });
 
     /**
    * Uses LikeModel to remove a  like for tuit.
@@ -51,7 +51,7 @@ export default class LikeDao implements LikeDaoI {
    * database
    */
     userUnlikesTuit = async (uid: string, tid: string): Promise<any> =>
-        LikeModel.deleteOne({tuit: tid, likedBy: uid});
+        LikeModel.deleteOne({ tuit: tid, likedBy: uid });
 
     /**
       * Uses LikeModel to retrieve all user documents from likes collection
@@ -61,7 +61,7 @@ export default class LikeDao implements LikeDaoI {
 
     findAllUsersThatLikedTuit = async (tid: string): Promise<Like[]> =>
         LikeModel
-            .find({tuit: tid})
+            .find({ tuit: tid })
             .populate("likedBy")
             .exec();
 
@@ -72,10 +72,10 @@ export default class LikeDao implements LikeDaoI {
       */
     findAllTuitsLikedByUser = async (uid: string): Promise<Like[]> =>
         LikeModel
-            .find({likedBy: uid})
+            .find({ likedBy: uid })
             .populate("tuit")
             .exec();
-    
+
 
 
     private static likeDao: LikeDao | null = null;
@@ -85,10 +85,10 @@ export default class LikeDao implements LikeDaoI {
      */
 
     public static getInstance = (): LikeDao => {
-        if(LikeDao.likeDao === null) {
+        if (LikeDao.likeDao === null) {
             LikeDao.likeDao = new LikeDao();
         }
         return LikeDao.likeDao;
     }
-    
+
 }

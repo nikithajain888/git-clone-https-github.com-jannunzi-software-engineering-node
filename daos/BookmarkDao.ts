@@ -1,7 +1,7 @@
- /**
- * @file Implements DAO managing data storage of bookmark. Uses mongoose BookmarkModel
- * to integrate with MongoDB
- */
+/**
+* @file Implements DAO managing data storage of bookmark. Uses mongoose BookmarkModel
+* to integrate with MongoDB
+*/
 import Bookmark from "../models/Bookmark";
 import BookmarkModel from "../mongoose/BookmarkModel";
 import BookmarkDaoI from "../interfaces/BookmarkDao";
@@ -19,9 +19,9 @@ export default class BookmarkDao implements BookmarkDaoI {
      * @param {string} tid Tuit id of tuit to be unbookmark
      * @returns Promise To be notified when the bookmark is deleted from
      * database
-     */  
+     */
     userUnBookmarksTuit = async (uid: String, tid: string): Promise<any> =>
-        BookmarkModel.deleteOne({bookmarkedBy:uid,tuit:tid});
+        BookmarkModel.deleteOne({ bookmarkedBy: uid, tuit: tid });
 
     /**
      * Uses BookmarksModel to retrieve all bookmarks from bookmarks collection
@@ -30,11 +30,11 @@ export default class BookmarkDao implements BookmarkDaoI {
      * database
      */
 
-    findAllBookmarksByUser = async(uid: string): Promise<Bookmark[]> =>
+    findAllBookmarksByUser = async (uid: string): Promise<Bookmark[]> =>
         BookmarkModel
-        .find({bookmarkedBy:uid})
-        .populate("tuit")
-        .exec();
+            .find({ bookmarkedBy: uid })
+            .populate("tuit")
+            .exec();
 
     /**
       * Uses BookmarkModel to retrieve all users documents from bookmarks collection
@@ -42,12 +42,12 @@ export default class BookmarkDao implements BookmarkDaoI {
       * @returns Promise To be notified when the users are retrieved from
       * database
       */
-    findAllUsersThatBookmarkedTuit = async(tid: string): Promise<Bookmark[]> =>
+    findAllUsersThatBookmarkedTuit = async (tid: string): Promise<Bookmark[]> =>
         BookmarkModel
-        .find({tuit:tid})
-        .populate("bookmarkedBy")
-        .exec();
-    
+            .find({ tuit: tid })
+            .populate("bookmarkedBy")
+            .exec();
+
     /**
      * Uses BookmarkModel to create a new Bookmark for a user for specified tuit.
      * @param {string} uid User id who wants to bookmark a tuit
@@ -55,8 +55,8 @@ export default class BookmarkDao implements BookmarkDaoI {
      * @returns Promise To be notified when the bookmark is added to the
      * database
      */
-    userBookmarksTuit = async(uid: String, tid: string): Promise<any> =>
-        BookmarkModel.create({bookmarkedBy:uid,tuit:tid});
+    userBookmarksTuit = async (uid: String, tid: string): Promise<any> =>
+        BookmarkModel.create({ bookmarkedBy: uid, tuit: tid });
 
     private static bookmarkdao: BookmarkDao | null = null;
     /**
@@ -64,7 +64,7 @@ export default class BookmarkDao implements BookmarkDaoI {
      * @returns BookmarkDao
      */
     public static getInstance = (): BookmarkDao => {
-        if(BookmarkDao.bookmarkdao === null) {
+        if (BookmarkDao.bookmarkdao === null) {
             BookmarkDao.bookmarkdao = new BookmarkDao();
         }
         return BookmarkDao.bookmarkdao;

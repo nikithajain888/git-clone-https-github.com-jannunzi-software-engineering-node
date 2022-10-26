@@ -10,7 +10,7 @@ export default interface LikeDao {
      * @returns Promise To be notified when the likes are retrieved from
      * database
      */
-    userLikesTuit(uid: string, tid: string):Promise<any>;
+    userLikesTuit(uid: string, tid: string): Promise<any>;
     /**
      * Uses LikeModel to remove a  like for tuit.
      * @param {string} uid User id of user who unliked the tuit
@@ -18,24 +18,24 @@ export default interface LikeDao {
      * @returns Promise To be notified when the likes are retrieved from
      * database
      */
-    userUnlikesTuit(uid:string, tid:string):Promise<any>;
+    userUnlikesTuit(uid: string, tid: string): Promise<any>;
     /**
      * Uses LikeModel to retrieve all likes from likes collection
      * @param {string} tid Tuit id for which likes are to be retrieved
      * @returns Promise To be notified when the likes are retrieved from
      * database
      */
-    findAllTuitsLikedByUser(uid:string):Promise<Like[]>;
-        /**
-     * Uses LikeModel to retrieve all likes from likes collection
-     * @param {string} uid Userids of users who liked the tuit
-     * @returns Promise To be notified when the likes are retrieved from
-     * database
-     */
-    findAllUsersThatLikedTuit(tid:string):Promise<Like[]>;
+    findAllTuitsLikedByUser(uid: string): Promise<Like[]>;
+    /**
+ * Uses LikeModel to retrieve all likes from likes collection
+ * @param {string} uid Userids of users who liked the tuit
+ * @returns Promise To be notified when the likes are retrieved from
+ * database
+ */
+    findAllUsersThatLikedTuit(tid: string): Promise<Like[]>;
     /**
      * Uses LikeModel to count likes on a tuit.
      * @returns Promise To be notified with the likes count.
      */
-    findTuitLikesCount(tid:string):void
+    findTuitLikesCount(tid: string): void
 }

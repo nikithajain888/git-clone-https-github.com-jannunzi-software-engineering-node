@@ -1,7 +1,7 @@
 /**
  * @file Bookmark Controller Interface RESTful Web service API for bookmarks instance
  */
-import {Request, Response} from "express";
+import { Request, Response } from "express";
 /**
  * @interface BookmarkController An interface for Bookmarks on Tuiter.
  *

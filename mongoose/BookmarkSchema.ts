@@ -10,7 +10,7 @@ import Bookmark from '../models/Bookmark';
   * @property {tuit} tid: primary key of tuit bookmarked.
   */
 const BookmarkSchema = new mongoose.Schema<Bookmark>({
-    tuit: {type: Schema.Types.ObjectId, ref: "TuitModel"},
-    bookmarkedBy: {type: Schema.Types.ObjectId, ref: "UserModel"},
-}, {collection: 'bookmarks'});
+    tuit: { type: Schema.Types.ObjectId, ref: "TuitModel" },
+    bookmarkedBy: { type: Schema.Types.ObjectId, ref: "UserModel" },
+}, { collection: 'bookmarks' });
 export default BookmarkSchema;

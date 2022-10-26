@@ -1,11 +1,11 @@
 /**
  * @file FollowController interface RESTful Web service API for Follows resource
  */
- import {Request, Response} from "express";
- /**
-  * @interface FollowController An interface for Follows on Tuiter.
-  *
-  */
+import { Request, Response } from "express";
+/**
+ * @interface FollowController An interface for Follows on Tuiter.
+ *
+ */
 
 export default interface FollowControllerI {
     /**
@@ -25,14 +25,14 @@ export default interface FollowControllerI {
      * on whether unfollow was successful or not
      */
     userUnfollowsAnotherUser(req: Request, res: Response): void;
-     /**
-     * Retrieves all users that follow the user specified
-     * @param {Request} req Represents client request: includes the path
-     * parameter uid representing the user for which all users who are following them 
-     * is to be retrieved
-     * @param {Response} res Represents response to client, including the
-     * body formatted as JSON arrays containing the users objects that are following the user
-     */
+    /**
+    * Retrieves all users that follow the user specified
+    * @param {Request} req Represents client request: includes the path
+    * parameter uid representing the user for which all users who are following them 
+    * is to be retrieved
+    * @param {Response} res Represents response to client, including the
+    * body formatted as JSON arrays containing the users objects that are following the user
+    */
     findAllFollowers(req: Request, res: Response): void;
     /**
      * Retrieves all users that the user follows
