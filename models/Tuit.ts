@@ -1,3 +1,6 @@
+/**
+ * @file declares Tuit datatype.
+ */
 import User from "./User";
 
 export default interface Tuit {

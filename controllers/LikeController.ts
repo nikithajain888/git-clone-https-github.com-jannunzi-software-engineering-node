@@ -2,6 +2,8 @@
  * @file Controller RESTful Web service API for likes resource
  */
  import {Express, Request, Response} from "express";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
  import LikeDao from "../daos/LikeDao";
  import LikeControllerI from "../interfaces/LikeController";
  
@@ -38,12 +40,21 @@
              app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
              app.post("/api/users/:uid/likes/:tid", LikeController.likeController.userLikesTuit);
              app.delete("/api/users/:uid/unlikes/:tid", LikeController.likeController.userUnlikesTuit);
+             app.get("/api/tuits/:tid/likes/count", LikeController.likeController.findTuitLikesCount);
          }
          return LikeController.likeController;
      }
  
      private constructor() {}
- 
+      /**
+      * Retrieves the count of users that liked a tuit from the database
+      * @param {Request} req Represents request from client, including the path
+      * parameter tid representing the liked tuit
+      * @param {Response} res Represents response to client, including the total count
+      */
+     findTuitLikesCount = (req: Request, res: Response) =>
+     LikeController.likeDao.findTuitLikesCount(req.params.tid)
+     .then(likes=>res.json(likes));
      /**
       * Retrieves all users that liked a tuit from the database
       * @param {Request} req Represents request from client, including the path

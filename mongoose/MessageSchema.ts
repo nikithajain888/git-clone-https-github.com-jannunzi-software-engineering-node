@@ -5,7 +5,8 @@
 import Message from "../models/Message";
  /**
   * @typedef MessagesSchema is how messages are represented.
-  * @property {ObjectId} userid: primary keys of sender and receiver
+  * @property {sender} userid: primary keys of sender
+  * @property {receiver} userid: primary keys of receiver
   */
  const MessageSchema = new mongoose.Schema<Message>({
     sender: {type: Schema.Types.ObjectId, ref:"UserModel"},

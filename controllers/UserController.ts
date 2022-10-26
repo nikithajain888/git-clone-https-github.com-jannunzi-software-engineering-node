@@ -48,16 +48,7 @@
              app.delete("/api/users",
                  UserController.userController.deleteAllUsers);
 
- 
-             // for testing. Not RESTful
-             app.get("/api/users/create",
-               UserController.userController.createUser);
-             app.get("/api/users/id/:uid/delete",
-               UserController.userController.deleteUser);
-             app.get("/api/users/username/:username/delete",
-               UserController.userController.deleteUsersByUsername);
-             app.get("/api/users/delete",
-               UserController.userController.deleteAllUsers);
+
          }
          return UserController.userController;
      }
@@ -130,8 +121,4 @@
          UserController.userDao.deleteAllUsers()
              .then((status) => res.send(status));
  
-     deleteUsersByUsername = (req: Request, res: Response) =>
-       UserController.userDao.deleteUsersByUsername(req.params.username)
-         .then(status => res.send(status));
-
  };
