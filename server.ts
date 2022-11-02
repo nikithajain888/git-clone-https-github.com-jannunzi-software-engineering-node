@@ -21,7 +21,7 @@ import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
 import mongoose, { get } from "mongoose";
-
+import cors from 'cors'
 
 require('dotenv').config()
 // build the connection string
@@ -37,7 +37,9 @@ const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString="mongodb+srv://nikithajain888:Passwordfse@cluster0.uz88i7e.mongodb.net/FSE-DB?retryWrites=true&w=majority";
 mongoose.connect(connectionString);
 
-const app = express();
+const app = express()
+
+app.use(cors())
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
