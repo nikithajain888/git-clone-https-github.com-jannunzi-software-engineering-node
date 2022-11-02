@@ -83,4 +83,13 @@ export default class UserDao implements UserDaoI {
     deleteAllUsers = async (): Promise<any> =>
         UserModel.deleteMany({});
 
+    
+    /**
+     * Removes all users with a specific username string from the database. Useful for testing
+     * @returns Promise To be notified when users with specific usernames are removed from the
+     * database
+     */
+     deleteUsersByUsername = async (username:string): Promise<any> =>
+        UserModel.deleteMany({username:username});
+
 };

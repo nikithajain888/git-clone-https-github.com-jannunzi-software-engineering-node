@@ -55,4 +55,11 @@ export default interface UserControllerI {
    * on whether deletion successful or not.
    */
     deleteAllUsers (req: Request, res: Response): void;
+
+     /**
+   * Removes all user instances with specific username from the database
+   * @param {Response} res Represents response to client: includes status
+   * on whether deletion successful or not.
+   */
+      deleteUsersByUsername (req: Request, res: Response): void;
 };
