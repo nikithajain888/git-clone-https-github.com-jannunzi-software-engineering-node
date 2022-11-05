@@ -57,9 +57,9 @@ export default interface UserControllerI {
     deleteAllUsers (req: Request, res: Response): void;
 
      /**
-   * Removes all user instances with specific username from the database
+   * Removes all user instances with specific username from the database. This is not a RESTful api.
    * @param {Response} res Represents response to client: includes status
-   * on whether deletion successful or not.
+   * on whether deletion successful or not. 
    */
       deleteUsersByUsername (req: Request, res: Response): void;
 };

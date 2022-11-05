@@ -45,4 +45,18 @@ export default interface TuitDaoI {
    * @returns Promise To be notified when tuit is removed from the database
    */
     deleteTuit(tid: string): Promise<any>;
+
+     /**
+   * Removes tuit from the database.
+   * @param {string} tid Primary key of tuit to be removed
+   * @returns Promise To be notified when tuit is removed from the database
+   */
+      deleteTuit(tid: string): Promise<any>;
+
+     /**
+   * Removes tuit from the database.
+   * @param {string} tuit Message tuit to be used as an identifier to delete a tuit
+   * @returns Promise To be notified when tuit is removed from the database
+   */
+      deleteTuitsByTuit(tuit: string): Promise<any>;
 };

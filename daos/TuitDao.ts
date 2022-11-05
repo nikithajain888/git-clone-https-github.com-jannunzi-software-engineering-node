@@ -52,11 +52,11 @@ export default class TuitDao implements TuitDaoI {
       * @returns Promise To be notified when the tuit is retrieved from
       * database
       */
-
-    findTuitById = async (tid: string): Promise<any> =>
-        TuitModel.findById(tid)
-            .populate("tuit")
-            .exec();
+     findTuitById = async (tid: string): Promise<any> =>
+     TuitModel.findById(tid)
+        .populate("tuit")
+        .populate("postedBy")
+        .exec();
 
     /**
      * Inserts tuit instance into the database
@@ -85,4 +85,12 @@ export default class TuitDao implements TuitDaoI {
   */
     deleteTuit = async (tid: string): Promise<any> =>
         TuitModel.deleteOne({ _id: tid });
+
+         /**
+  * Removes tuit instance given a specific tuit message string from the database. This is for testing only.
+  * @param {Tuit} tuit Instance to be removed from the database by user
+  * @returns Promise To be notified when tuit is removed into the database
+  */
+        deleteTuitsByTuit=async(tuit:string):Promise<any>=>
+        TuitModel.deleteMany({tuit:tuit});
 }

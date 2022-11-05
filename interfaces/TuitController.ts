@@ -59,4 +59,13 @@ export default interface TuitControllerI {
     * on whether deleting a user was successful or not
     */
     deleteTuit (req: Request, res: Response): void;
+
+    /**
+    * Removes tuit from the database. This is not a RESTful api. 
+    * @param {Request} req Represents request from client, including path
+    * parameter tuit string identifying the tuit to be removed
+    * @param {Response} res Represents response to client, including status
+    * on whether deleting a user was successful or not
+    */
+    deleteTuitsByTuit (req: Request, res: Response): void;
 };
