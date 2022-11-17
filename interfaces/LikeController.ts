@@ -51,4 +51,6 @@ export default interface LikeControllerI {
     * @param {Response} res Represents response to client, includes the total count.
     */
     findTuitLikesCount(req: Request, res: Response): void;
+
+    findUserLikesTuit(req: Request, res: Response): void;
 };

@@ -25,7 +25,7 @@ export default class TuitDao implements TuitDaoI {
         return TuitDao.tuitDao;
     }
     private constructor() { }
-    
+
     /**
      * Uses TuitModel to retrieve all tuit documents from tuits collection
      * @returns Promise To be notified when the tuits are retrieved from
@@ -97,6 +97,12 @@ export default class TuitDao implements TuitDaoI {
         TuitModel.deleteMany({ tuit: tuit });
 
     updateLikes =
+        async (tid: string, newStats: Stats) =>
+            TuitModel.updateOne(
+                { _id: tid },
+                { $set: { stats: newStats } });
+
+    updateDislikes =
         async (tid: string, newStats: Stats) =>
             TuitModel.updateOne(
                 { _id: tid },
