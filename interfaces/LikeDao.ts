@@ -40,5 +40,13 @@ export default interface LikeDao {
     findTuitLikesCount(tid: string): void
 
 
-    findUserLikesTuit(uid:string,tid:string):void
+    /**
+     * Uses LikeModel to find the like with a specific user and tuit.
+     * @param {string} uid User id of user who unliked the tuit
+     * @param {string} tid Tuit id of tuit to be unliked
+     * @returns Promise To be notified when the likes are retrieved from
+     * database
+     */
+
+    findUserLikesTuit(uid:string,tid:string):Promise<any>;
 }
