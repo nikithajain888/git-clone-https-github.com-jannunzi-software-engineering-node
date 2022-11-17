@@ -12,6 +12,7 @@ import UserDaoI from "../interfaces/UserDao";
  * @property {UserDao} userDao Private single instance of UserDao
  */
 export default class UserDao implements UserDaoI {
+
     private static userDao: UserDao | null = null;
 
     /**
@@ -91,5 +92,14 @@ export default class UserDao implements UserDaoI {
      */
      deleteUsersByUsername = async (username:string): Promise<any> =>
         UserModel.deleteMany({username:username});
+
+
+    /**
+     * Finds all users with a specific username string from the database. Useful for testing
+     * @returns Promise To be notified when users with specific usernames are removed from the
+     * database
+     */
+     findUserByUsername = async (username:string): Promise<any> =>
+        UserModel.findOne({username:username});
 
 };

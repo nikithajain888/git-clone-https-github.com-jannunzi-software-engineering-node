@@ -2,6 +2,7 @@
  * @file declares Tuit datatype.
  */
 import User from "./User";
+import Stats from "./Stats"
 /**
   * @typedef Tuit represents the following manadatory properties
   * @tuit
@@ -15,4 +16,5 @@ export default interface Tuit {
     youtube?: String,
     avatarLogo?: String,
     imageOverlay?: String,
+    stats?:Stats
 };

@@ -59,4 +59,6 @@ export default interface TuitDaoI {
    * @returns Promise To be notified when tuit is removed from the database
    */
       deleteTuitsByTuit(tuit: string): Promise<any>;
+
+     
 };

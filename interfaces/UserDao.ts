@@ -45,4 +45,7 @@ export default interface UserDaoI {
    * @returns Promise To be notified when all users are removed from database.
    */
     deleteUsersByUsername(username:string) : Promise<any>;
+
+
+    findUserByUsername(username:string) : Promise<any>;
 };
