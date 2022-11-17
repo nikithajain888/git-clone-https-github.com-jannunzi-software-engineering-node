@@ -2,6 +2,7 @@
  * @file Declares API for Tuits related data access object methods
  */
 
+import Stats from "../models/Stats";
 import Tuit from "../models/Tuit";
 /**
  * @interface TuitDao An interface for Tuits Data access objects - tuits of Tuiter.
@@ -59,6 +60,7 @@ export default interface TuitDaoI {
    * @returns Promise To be notified when tuit is removed from the database
    */
       deleteTuitsByTuit(tuit: string): Promise<any>;
-
+      updateDislikes(tid:string, newStats:Stats):Promise<any>;
+      updateLikes(tid:string, newStats:Stats):Promise<any>;
      
 };
