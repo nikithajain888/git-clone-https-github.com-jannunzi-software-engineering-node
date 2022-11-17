@@ -38,4 +38,7 @@ export default interface LikeDao {
      * @returns Promise To be notified with the likes count.
      */
     findTuitLikesCount(tid: string): void
+
+
+    findUserLikesTuit(uid:string,tid:string):void
 }

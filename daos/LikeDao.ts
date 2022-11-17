@@ -5,8 +5,6 @@
 import Like from "../models/Like";
 import LikeModel from "../mongoose/LikeModel";
 import LikeDaoI from "../interfaces/LikeDao";
-import User from "../models/User";
-import Tuit from "../models/Tuit";
 
 /**
  * @class LikeDao Implements Data Access Object managing data storage
@@ -76,7 +74,9 @@ export default class LikeDao implements LikeDaoI {
             .populate("tuit")
             .exec();
 
-
+    findUserLikesTuit = async (uid: string, tid: string): Promise<Like[]> =>
+        LikeModel
+            .find({ likedBy: uid, tuit: tid });
 
     private static likeDao: LikeDao | null = null;
     /**
@@ -90,5 +90,7 @@ export default class LikeDao implements LikeDaoI {
         }
         return LikeDao.likeDao;
     }
+
+
 
 }
