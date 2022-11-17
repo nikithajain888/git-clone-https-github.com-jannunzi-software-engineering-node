@@ -22,21 +22,26 @@
  // mongoose.connect(url)
  const cors = require('cors')
  const app = express();
- 
- app.use(cors());
- app.use(express.json());
+ const corsOptions ={
+    origin:true, 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+
  let sess = {
      secret: 'process.env.SECRET',
      cookie: {
          secure: false
      }
   }
+  app.use(cors(corsOptions));
+  app.use(session(sess));
+  app.use(express.json());
   if (process.env.ENV === 'PRODUCTION') {
      app.set('trust proxy', 1) // trust first proxy
      sess.cookie.secure = true // serve secure cookies
   }
-  app.use(session(sess));
-  app.use(express.json());
+
   const userController = UserController.getInstance(app);
   const tuitController = TuitController.getInstance(app);
   const likesController = LikeController.getInstance(app);
@@ -45,11 +50,6 @@
   const bookmarkController = BookmarkController.getInstance(app);
   const messageController = MessageController.getInstance(app);
  AuthenticationController(app);
- FollowController.getInstance(app);
- LikeController.getInstance(app);
- DislikeController.getInstance(app);
- BookmarkController.getInstance(app);
- MessageController.getInstance(app);
 
  app.get('/', (req: Request, res: Response) =>
      res.send('Welcome to Foundation of Software Engineering!!!!'));
