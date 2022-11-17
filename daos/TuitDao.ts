@@ -25,6 +25,7 @@ export default class TuitDao implements TuitDaoI {
         return TuitDao.tuitDao;
     }
     private constructor() { }
+    
     /**
      * Uses TuitModel to retrieve all tuit documents from tuits collection
      * @returns Promise To be notified when the tuits are retrieved from

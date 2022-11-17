@@ -38,4 +38,6 @@ export default interface DislikeDao {
      * @returns Promise To be notified with the Dislikes count.
      */
     findTuitDislikesCount(tid: string): void
+
+    findUserDislikesTuit(uid:string,tid:string):Promise<any>;
 }

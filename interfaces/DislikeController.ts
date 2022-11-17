@@ -13,4 +13,5 @@
     findTuitDislikesCount(req: Request, res: Response): void;
     userDislikesTuit(req: Request, res: Response): void;
     userUndislikesTuit(req: Request, res: Response): void;
+    findUserDislikesTuit(req: Request, res: Response): void;
  }

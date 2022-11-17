@@ -2,8 +2,6 @@
  * @file Controller RESTful Web service API for Dislikes resource
  */
  import { Express, Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
  import DislikeDao from "../daos/DislikeDao";
  import TuitDao from "../daos/TuitDao";
  import DislikeControllerI from "../interfaces/DislikeController";
