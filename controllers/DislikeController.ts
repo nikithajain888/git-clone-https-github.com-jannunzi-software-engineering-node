@@ -2,8 +2,9 @@
  * @file Controller RESTful Web service API for Dislikes resource
  */
  import { Express, Request, Response } from "express";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
  import DislikeDao from "../daos/DislikeDao";
- import TuitDao from "../daos/TuitDao";
  import DislikeControllerI from "../interfaces/DislikeController";
  
  /**
@@ -24,8 +25,7 @@
   * RESTful Web service API
   */
  export default class DislikeController implements DislikeControllerI {
-     private static DislikeDao = DislikeDao.getInstance();
-     private static tuitDao = TuitDao.getInstance();
+     private static DislikeDao: DislikeDao = DislikeDao.getInstance();
      private static DislikeController: DislikeController | null = null;
      /**
       * Creates singleton controller instance
@@ -41,22 +41,18 @@
              app.post("/api/users/:uid/dislikes/:tid", DislikeController.DislikeController.userDislikesTuit);
              app.delete("/api/users/:uid/undislikes/:tid", DislikeController.DislikeController.userUndislikesTuit);
              app.get("/api/tuits/:tid/dislikes/count", DislikeController.DislikeController.findTuitDislikesCount);
-             //app.put("/api/users/:uid/dislikes/:tid", DislikeController.DislikeController.userTogglesTuitDislikes);
-             app.get("/api/users/:uid/userDisliked/:tid",DislikeController.DislikeController.findUserDislikesTuit)
          }
          return DislikeController.DislikeController;
      }
  
      private constructor() { }
-     
-     
      /**
      * Retrieves the count of users that Disliked a tuit from the database
      * @param {Request} req Represents request from client, including the path
      * parameter tid representing the Disliked tuit
      * @param {Response} res Represents response to client, including the total count
      */
-      findTuitDislikesCount = (req: Request, res: Response) =>
+     findTuitDislikesCount = (req: Request, res: Response) =>
          DislikeController.DislikeDao.findTuitDislikesCount(req.params.tid)
              .then(Dislikes => res.json(Dislikes));
      /**
@@ -100,23 +96,11 @@
       * @param {Response} res Represents response to client, including status
       * on whether deleting the Dislike was successful or not
       */
-      userUndislikesTuit = (req: Request, res: Response) =>
+     userUndislikesTuit = (req: Request, res: Response) =>
          DislikeController.DislikeDao.userUndislikesTuit(req.params.uid, req.params.tid)
              .then(status => res.send(status));
- 
-  
- 
-     findUserDislikesTuit = (req:Request ,res:Response) => {
-         const uid = req.params.uid;
-         const tid = req.params.tid;
-         // @ts-ignore
-         const profile = req.session['profile'];
-         const userId = uid === "me" && profile ?
-             profile._id : uid;
- 
-         DislikeController.DislikeDao.findUserDislikesTuit(uid,tid)
-         .then(Dislikes => res.json(Dislikes));
-     }
- 
- 
+
+    findUserDislikesTuit = (req: Request, res: Response) =>
+        DislikeController.DislikeDao.findUserDislikesTuit(req.params.uid, req.params.tid)
+            .then(status => res.send(status));
  };

@@ -7,6 +7,7 @@
  import TuitController from "./controllers/TuitController";
  import FollowController from "./controllers/FollowController";
  import LikeController from "./controllers/LikeController";
+ import DislikeController from "./controllers/DislikeController";
  import MessageController from './controllers/MessageController';
  import BookmarkController from './controllers/BookmarkController';
  import AuthenticationController from './controllers/authcontroller';
@@ -39,14 +40,17 @@
   const userController = UserController.getInstance(app);
   const tuitController = TuitController.getInstance(app);
   const likesController = LikeController.getInstance(app);
+  const dislikeController = DislikeController.getInstance(app);
   const followController = FollowController.getInstance(app);
   const bookmarkController = BookmarkController.getInstance(app);
   const messageController = MessageController.getInstance(app);
  AuthenticationController(app);
  FollowController.getInstance(app);
  LikeController.getInstance(app);
+ DislikeController.getInstance(app);
  BookmarkController.getInstance(app);
  MessageController.getInstance(app);
+
  app.get('/', (req: Request, res: Response) =>
      res.send('Welcome to Foundation of Software Engineering!!!!'));
 
