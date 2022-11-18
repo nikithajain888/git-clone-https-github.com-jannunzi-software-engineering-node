@@ -121,6 +121,14 @@ export default class LikeController implements LikeControllerI {
         LikeController.likeDao.userUnlikesTuit(req.params.uid, req.params.tid)
             .then(status => res.send(status));
 
+     /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is liking
+     * the tuit and the tuit being liked
+     * @param {Response} res Represents response to client, including a
+     * user object that liked a tuit
+     */
+
     findUserLikesTuit = (req: Request, res: Response) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
@@ -134,7 +142,13 @@ export default class LikeController implements LikeControllerI {
 
     }
 
-  
+      /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is toogling
+     * like button on a tuit
+     * @param {Response} res Represents response to client, including status
+     * on whether deleting the toggling like was successful or not
+     */
 
 
     userTogglesTuitLikes = async (req: Request, res: Response) => {

@@ -2,13 +2,11 @@
  * @file Controller RESTful Web service API for likes resource
  */
 import { Express, Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 import BookmarkDao from "../daos/BookmarkDao";
 import BookmarkControllerI from "../interfaces/BookmarkController";
 
 /**
- * @class BookmarkController Implements RESTful Web service API for users resource.
+ * @class BookmarkController Implements RESTful Web service API for bookmarks resource.
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:uid/bookmarks/:tid to create a new bookmark instance</li>

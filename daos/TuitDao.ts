@@ -50,7 +50,7 @@ export default class TuitDao implements TuitDaoI {
 
     /**
       * Uses TuitModel to retrieve the tuit documens by a user
-      * @param {string} uid Tuit's primary key
+      * @param {string} tid Tuit's primary key
       * @returns Promise To be notified when the tuit is retrieved from
       * database
       */
@@ -89,19 +89,33 @@ export default class TuitDao implements TuitDaoI {
         TuitModel.deleteOne({ _id: tid });
 
     /**
-* Removes tuit instance given a specific tuit message string from the database. This is for testing only.
-* @param {Tuit} tuit Instance to be removed from the database by user
-* @returns Promise To be notified when tuit is removed into the database
-*/
+    * Removes tuit instance given a specific tuit message string from the database. This is for testing only.
+    * @param {Tuit} tuit Instance to be removed from the database by user
+    * @returns Promise To be notified when tuit is removed into the database
+    */
     deleteTuitsByTuit = async (tuit: string): Promise<any> =>
         TuitModel.deleteMany({ tuit: tuit });
 
+
+    /**
+    * Updates tuit stats instance given a tuit id from the database.
+    * @param {string} tid Tuit's primary key
+    * @param {Stats} newStats Stats object instance to be updated
+    *  @returns Promise To be notified when tuit is update with stats into the database
+    */
     updateLikes =
         async (tid: string, newStats: Stats) =>
             TuitModel.updateOne(
                 { _id: tid },
                 { $set: { stats: newStats } });
 
+
+    /**
+    * Updates tuit stats instance given a tuit id from the database.
+    * @param {string} tid Tuit's primary key
+    * @param {Stats} newStats Stats object instance to be updated
+    *  @returns Promise To be notified when tuit is update with stats into the database
+    */
     updateDislikes =
         async (tid: string, newStats: Stats) =>
             TuitModel.updateOne(

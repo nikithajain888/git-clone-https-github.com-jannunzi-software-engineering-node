@@ -1,3 +1,6 @@
+/**
+ * @file Controller RESTful Web service API for authentication resource
+ */
 import {Request, Response, Express} from "express";
 import UserDao from "../daos/UserDao";
 const bcrypt = require('bcrypt');
@@ -6,6 +9,8 @@ const saltRounds = 10;
 const AuthenticationController = (app: Express) => {
 
   const userDao: UserDao = UserDao.getInstance()
+
+
 
   const signup = async (req: Request, res: Response) => {
     const newUser = req.body;
@@ -63,7 +68,17 @@ const AuthenticationController = (app: Express) => {
       console.log("Passwords do not match");
     }
   };
-
+/**
+ * @class AuthController Implements RESTful Web service API for authentication resource.
+ * Defines the following HTTP endpoints:
+ * <ul>
+ *     <li>POST /auth/login to login to the app</li>
+ *     <li>POST /auth/profile to retrieve the profile of the user</li>
+ *     <li>POST /auth/logout to logout of the app</li>
+ *     <li>POST /auth/signup to signup a user for the app</li>
+ * </ul>
+ * RESTful Web service API
+ */
   app.post("/auth/login", login);
   app.post("/auth/profile", profile);
   app.post("/auth/logout", logout);

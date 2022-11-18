@@ -119,6 +119,14 @@ export default class DislikeController implements DislikeControllerI {
         DislikeController.dislikeDao.userUndislikesTuit(req.params.uid, req.params.tid)
             .then(status => res.send(status));
 
+
+     /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is toogling
+     * dislike button on a tuit
+     * @param {Response} res Represents response to client, including status
+     * on whether deleting the toggling dislike was successful or not
+     */
     userTogglesTuitDislikes = async (req: Request, res: Response) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
@@ -158,6 +166,15 @@ export default class DislikeController implements DislikeControllerI {
             res.sendStatus(404);
         }
     }
+
+
+    /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is disliking
+     * the tuit and the tuit being Disliked
+     * @param {Response} res Represents response to client, including a
+     * user object that disliked a tuit
+     */
 
     findUserDislikesTuit = (req: Request, res: Response) => {
         const uid = req.params.uid;
