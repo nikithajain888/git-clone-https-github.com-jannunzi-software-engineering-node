@@ -158,9 +158,10 @@ export default class LikeController implements LikeControllerI {
          // @ts-ignore
         const userId = uid === "me" && profile ?
          //@ts-ignore
-         profile._id : userId;
+         profile._id : uid;
         try {
             const userAlreadyDislikedTuit = await LikeController.dislikeDao
+             //@ts-ignore
                 .findUserDislikesTuit(userId, tid);
             const userAlreadyLikedTuit = await LikeController.likeDao
              //@ts-ignore
